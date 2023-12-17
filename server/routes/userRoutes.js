@@ -7,11 +7,6 @@ router.get("/", userController.index);
 router.post("/resetPassword", userController.requestPass);
 router.patch("/resetPassword/:id", userController.resetPass);
 router.get(
-  "/orders/:id",
-  checkJwt({ secret: process.env.JWT_CUSTOMER_SECRET_KEY, algorithms: ["HS256"] }),
-  userController.getOrders,
-);
-router.get(
   "/:id",
   checkJwt({ secret: process.env.JWT_CUSTOMER_SECRET_KEY, algorithms: ["HS256"] }),
   userController.show,

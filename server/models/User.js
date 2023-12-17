@@ -3,8 +3,7 @@ const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema(
   {
-    firstname: String,
-    lastname: String,
+    fullname: String,
     email: {
       type: String,
       unique: true,
@@ -12,17 +11,17 @@ const userSchema = new mongoose.Schema(
     password: String,
     phone: String,
     address: String,
-    shippingAddress: String,
   },
   { timestamps: true },
 );
 
-// userSchema.methods.toJSON = function () {
-//   const user = this._doc;
-//   user.id = this._id.toString();
-//   delete user._id;
-//   return user;
-// };
+userSchema.methods.toJSON = function () {
+  const user = this._doc;
+  user.id = this._id.toString();
+  delete user._id;
+  delete user.__v
+  return user;
+};
 
 // userSchema.virtual("slug").get(function () {
 //   return slugify(`${this.firstname} ${this.lastname}`, {

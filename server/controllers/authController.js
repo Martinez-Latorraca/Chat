@@ -1,5 +1,4 @@
 const User = require("../models/User");
-const Order = require("../models/Order");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -14,12 +13,6 @@ async function login(req, res) {
       });
       delete user._doc.password;
       user._doc.token = token;
-
-      const orders = await Order.find({ user: user._id })
-        .sort({ createdAt: -1 })
-        .populate("user", "-password");
-
-      user._doc.orders = orders;
 
       return res.status(201).json(user);
     } else {
@@ -41,12 +34,10 @@ async function signUp(req, res) {
       .send({ message: "User already registered, try with an other email or username" });
   } else {
     const newUser = await User.create({
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
+      fullname: req.body.fullname,
       email: req.body.email,
       phone: req.body.phone,
       address: req.body.address,
-      shippingAddress: req.body.shippingAddress,
       password: req.body.password,
     });
 

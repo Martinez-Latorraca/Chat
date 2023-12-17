@@ -11,6 +11,7 @@ AdminSchema.methods.toJSON = function () {
   const admin = this._doc;
   admin.id = this._id.toString();
   delete admin._id;
+  delete admin.__v;
   return admin;
 };
 

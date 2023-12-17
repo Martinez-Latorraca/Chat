@@ -29,9 +29,6 @@ async function runAllSeeders() {
   // Seeders:
 
   await require("./adminSeeders")();
-  await require("./containerSeeders")();
-  await require("./styleSeeders")();
-  await require("./productSeeders")();
   await require("./userSeeder")();
 
   /**
